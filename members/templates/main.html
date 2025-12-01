@@ -1,0 +1,31 @@
+{% extends "master.html" %}
+
+{% block title %}
+  My Tennis Club
+{% endblock %}
+
+
+{% block content %}
+  <h1>My Tennis Club</h1>
+   <form action="/search/" method="GET">
+    <input type="text" name="q" placeholder="Search members by first name">
+    <input type="submit" value="Search">
+  </form>
+
+  <h3>Members</h3>
+  
+  <p>Check out all our <a href="members/">members</a></p>
+
+  {% if user.is_authenticated %}
+  <div style="text-align:right; padding:20px;">
+    <strong>{{ user.username }}</strong>
+    <form method="post" action="{% url 'logout' %}" style="display:inline;">
+      {% csrf_token %}
+      <button type="submit" style="background:#dc3545;color:white;border:none;padding:8px 16px;border-radius:5px;cursor:pointer;">
+        Logout
+      </button>
+    </form>
+  </div>
+{% endif %}
+  
+{% endblock %}

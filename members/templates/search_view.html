@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Members</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        input[type=text] { padding: 10px; width: 300px; font-size: 16px; }
+        button { padding: 10px 20px; font-size: 16px; }
+        .result { margin-top: 20px; padding: 10px; background: #f0f0f0; }
+    </style>
+</head>
+<body>
+
+<h1>Search Members</h1>
+
+<!-- This is the search form -->
+<form method="GET">  <!-- Important: use GET so the query appears in URL -->
+    <input type="text" name="q" placeholder="Enter first or last name..." 
+           value="{{ request.GET.q }}">  <!-- keeps the typed text after search -->
+    <button type="submit">Search</button>
+</form>
+
+<!-- Show results only if user searched -->
+{% if results %}
+    <h2>Results ({{ results|length }})</h2>
+    {% for member in results %}
+        <div class="result">
+            {{ member.firstname }} {{ member.lastname }}
+            {% if member.age %} (Age: {{ member.age }}) {% endif %}
+        </div>
+    {% empty %}
+        <p>No members found.</p>
+    {% endfor %}
+
+{% elif request.GET.q %}
+    <p>No results for "{{ request.GET.q }}"</p>
+{% else %}
+    <p>Type something and click Search!</p>
+{% endif %}
+
+</body>
+</html>

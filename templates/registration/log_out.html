@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Logged Out</title>
+    <style>
+        body { font-family: Arial; text-align: center; padding: 100px; background: #f4f4f4; }
+        .box { background: white; padding: 40px; border-radius: 10px; display: inline-block; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+        a { color: #007bff; text-decoration: none; font-size: 18px; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        {% csrf_token %}
+        <h1>You have been logged out</h1>
+        <p>Thank you for using the system!</p>
+        <br>
+        <a href="{% url 'login' %}">Login Again</a>
+    </div>
+</body>
+</html>
